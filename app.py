@@ -35,8 +35,16 @@ def zip_file(output_file, zip_name):
 
 # Function to send email
 def send_email(receiver_email, attachment_path):
-    sender_email = "ssharma12_be23@thapar.edu"
-    sender_password = "gsdk pdfh ppey vkf"
+    # Retrieve credentials from Streamlit secrets
+    try:
+        sender_email = st.secrets["EMAIL_USER"]
+        sender_password = st.secrets["EMAIL_PASSWORD"]
+    except FileNotFoundError:
+        st.error("Secrets file not found. Please set up your secrets.")
+        return False
+    except KeyError:
+        st.error("Email credentials not found in secrets. Please verify EMAIL_USER and EMAIL_PASSWORD are set.")
+        return False
     
 
 
