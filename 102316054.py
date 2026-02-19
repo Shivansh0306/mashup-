@@ -42,19 +42,31 @@ def download_videos(singer, num_videos):
 def convert_and_trim(duration):
     output_files = []
 
-    for file in os.listdir("downloads"):
-        if file.endswith(('.mp3', '.m4a', '.webm')):
-            file_path = os.path.join("downloads", file)
-            audio = AudioSegment.from_file(file_path)
-            trimmed = audio[:duration * 1000]
+    if not os.path.exists("downloads") or not os.listdir("downloads"):
+        raise Exception("No videos found in 'downloads' folder. Download might have failed.")
 
-            output_name = file.split('.')[0] + "_trimmed.mp3"
-            trimmed.export(output_name, format="mp3")
-            output_files.append(output_name)
+    for file in os.listdir("downloads"):
+        if file.endswith(('.mp3', '.m4a', '.webm', '.opuc', '.opus')):
+            file_path = os.path.join("downloads", file)
+            try:
+                audio = AudioSegment.from_file(file_path)
+                trimmed = audio[:duration * 1000]
+
+                output_name = os.path.splitext(file)[0] + "_trimmed.mp3"
+                trimmed.export(output_name, format="mp3")
+                output_files.append(output_name)
+            except Exception as e:
+                print(f"Skipping {file} due to error: {e}")
+
+    if not output_files:
+        raise Exception("No audio files were successfully converted and trimmed.")
 
     return output_files
 
 def merge_audios(audio_files, output_file):
+    if not audio_files:
+        raise Exception("No audio files to merge.")
+        
     combined = AudioSegment.empty()
 
     for file in audio_files:

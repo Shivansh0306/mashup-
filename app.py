@@ -214,4 +214,14 @@ if submitted:
                     os.remove(output_filename)
                 if os.path.exists(zip_filename):
                     os.remove(zip_filename)
-                # Note: 'downloads' folder cleanup is left as exercise or manual
+                
+                # Cleanup trimmed files
+                for f in os.listdir():
+                    if f.endswith("_trimmed.mp3"):
+                        os.remove(f)
+
+                # Cleanup downloads folder
+                if os.path.exists("downloads"):
+                    for f in os.listdir("downloads"):
+                        os.remove(os.path.join("downloads", f))
+                    os.rmdir("downloads")
