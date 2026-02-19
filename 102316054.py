@@ -24,11 +24,11 @@ def download_videos(singer, num_videos):
         'format': 'bestaudio/best',
         'outtmpl': 'downloads/%(title)s.%(ext)s',
         'noplaylist': True,
-        'quiet': True,
-        'no_warnings': True,
+        'quiet': False,  # Changed to catch errors
+        'no_warnings': False, # Changed to catch errors
         'nocheckcertificate': True,
-        'ignoreerrors': True,
-        'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+        'ignoreerrors': False, # Changed to catch errors
+        'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
     }
 
     if not os.path.exists("downloads"):
