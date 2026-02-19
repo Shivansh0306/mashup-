@@ -47,7 +47,8 @@ After running the program successfully:
 
 You can access the deployed web application here:
 
-👉 **[https://mashup-shivansh.streamlit.app/](https://mashup-shivansh.streamlit.app/)**
+👉 **[https://mashup-shivansh.streamlit.app/](https://mashup102316054.streamlit.app/)**
+
 
 
 
